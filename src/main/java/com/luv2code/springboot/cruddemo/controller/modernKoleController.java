@@ -4,8 +4,7 @@ import com.luv2code.springboot.cruddemo.entity.Employee;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,22 @@ public class modernKoleController {
         modelim.addAttribute("koleler", koleler);
 
         return "modern-kole-panel";
+    }
+
+    @GetMapping("/modernKoleEkle")
+    public String modernKoleEkle(Model modelimiz) {
+        Employee yeniKole = new Employee();
+
+        modelimiz.addAttribute("yeniKole", yeniKole);
+
+        return "modern-Kole-ekle-form";
+    }
+
+    @PostMapping("/kaydet")
+    public String koleKaydet(@ModelAttribute("kole") Employee kole) {
+
+        employeeService.save(kole);
+
+        return "redirect:/modernkole/koleler";
     }
 }
