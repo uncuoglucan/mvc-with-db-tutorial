@@ -19,6 +19,7 @@
                 <th>İsim</th>
                 <th>kütük</th>
                 <th>eloktronik posta</th>
+                <th>Güncelle</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +27,14 @@
                 <td th:text="${modenkole.firstName}"></td>
                 <td th:text="${modenkole.lastName}"></td>
                 <td th:text="${modenkole.email}"></td>
+                <td>
+                    <a th:href="@{/modernkole/modernKoleGuncelleForm (koleId=${modenkole.id})}" class="btn btn-warning btn-sm">Güncelle</a>
+                </td>
+                <td>
+                    <a th:href="@{/modernkole/modernKoleGonderme (koleId=${modenkole.id})}"
+                       class="btn btn-warning btn-sm"
+                        onclick="if (!(confirm('eminsindir?'))) return false">YIKILLLLLL</a>
+                </td>
             </tr>
             </tbody>
         </table>

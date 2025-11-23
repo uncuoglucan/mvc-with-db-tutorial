@@ -43,4 +43,22 @@ public class modernKoleController {
 
         return "redirect:/modernkole/koleler";
     }
+
+    @GetMapping("/modernKoleGuncelleForm")
+    public String modernKoleGuncelleForm(@RequestParam("koleId") int id,
+                                            Model modelimiz) {
+            Employee mevcutKole = employeeService.findById(id);
+
+            modelimiz.addAttribute("yeniKole", mevcutKole);
+
+            return "modern-Kole-ekle-form";
+        }
+
+    @GetMapping("/modernKoleGonderme")
+    public String koleSil(@RequestParam("koleId") int id)
+    {
+        employeeService.deleteById(id);
+
+        return "redirect:/modernkole/koleler";
+    }
 }
