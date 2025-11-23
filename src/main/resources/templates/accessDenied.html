@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Access Denied</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+          background-color: #f8d7da;
+        }
+        .denied-box {
+          max-width: 600px;
+          margin: 5rem auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container denied-box">
+    <div class="card shadow-sm border-danger">
+        <div class="card-body text-center">
+            <h1 class="text-danger mb-3">Access Denied</h1>
+            <p class="text-muted mb-4">You do not have permission to view this page.</p>
+
+            <!-- Return Button -->
+            <a th:href="@{/}" class="btn btn-outline-danger btn-lg">Return to Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/modernkole")
 public class modernKoleController {
 
     private EmployeeService employeeService;
@@ -22,6 +21,21 @@ public class modernKoleController {
     public String showHome() {
 
         return "home";
+    }
+
+    @GetMapping("/leaders")
+    public String showLeaders() {
+        return "leaders";
+    }
+
+    @GetMapping("/accessDenied")
+    public String showAccessDenied() {
+        return "accessDenied";
+    }
+
+    @GetMapping("/systems")
+    public String showSystems() {
+        return "systems";
     }
 
 

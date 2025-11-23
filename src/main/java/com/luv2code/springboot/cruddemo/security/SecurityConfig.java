@@ -15,21 +15,21 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsManager() {
 
         UserDetails Luffy = User.builder()
-                .username("Luffy")
+                .username("luffy")
                 .password("{noop}test123")
-                .roles("EMPLOYEE","MANAGER")
+                .roles("EMPLOYEE")
                 .build();
 
         UserDetails Kuma = User.builder()
-                .username("Kuma")
-                .password("{noop}test123")
-                .roles("EMPLOYEE","ADMIN")
+                .username("a")
+                .password("{noop}a")
+                .roles("EMPLOYEE","BADANACI")
                 .build();
 
         UserDetails Roger = User.builder()
-                .username("Roger")
+                .username("roger")
                 .password("{noop}test123")
-                .roles("EMPLOYEE","ADMIN","MANAGER")
+                .roles("EMPLOYEE","ADMIN","BADANACI")
                 .build();
 
         // Define users, roles, and authorities here
@@ -39,12 +39,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
-                        configurer.anyRequest().authenticated())
-                            .formLogin(form ->
-                                form.loginPage("/modernkole/loginPage")
-                                    .loginProcessingUrl("/modernkole/authenticateTheUser")
-                                    .permitAll()
-                );
+                        configurer.requestMatchers("/").hasRole("EMPLOYEE")
+                                .requestMatchers("/leaders/**").hasRole("BADANACI")
+                                .requestMatchers("/systems/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
+                                    .formLogin(form ->
+                                        form.loginPage("/loginPage")
+                                            .loginProcessingUrl("/authenticateTheUser")
+                                            .permitAll()
+                )
+                .logout(logout ->
+                        logout.permitAll()
+                )
+                .exceptionHandling(configurer ->
+                        configurer.accessDeniedPage("/accessDenied"));
 
         return http.build();
     }
