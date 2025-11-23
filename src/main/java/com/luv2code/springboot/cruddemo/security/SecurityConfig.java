@@ -6,34 +6,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-        UserDetails Luffy = User.builder()
-                .username("luffy")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
-
-        UserDetails Kuma = User.builder()
-                .username("a")
-                .password("{noop}a")
-                .roles("EMPLOYEE","BADANACI")
-                .build();
-
-        UserDetails Roger = User.builder()
-                .username("roger")
-                .password("{noop}test123")
-                .roles("EMPLOYEE","ADMIN","BADANACI")
-                .build();
-
-        // Define users, roles, and authorities here
-        return new InMemoryUserDetailsManager(Luffy, Kuma, Roger);
+    public UserDetailsManager userDetailsManager(DataSource datasource){
+        return new JdbcUserDetailsManager(datasource);
     }
 
     @Bean
