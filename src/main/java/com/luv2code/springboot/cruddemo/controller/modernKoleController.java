@@ -18,6 +18,12 @@ public class modernKoleController {
         employeeService = theEmployeeService;
     }
 
+    @GetMapping("/")
+    public String mainPage() {
+        return "home";
+    }
+
+
     @RequestMapping(value = "/koleler", method = RequestMethod.GET)
     public String getKoleler(Model modelim) {
 
@@ -61,4 +67,6 @@ public class modernKoleController {
 
         return "redirect:/modernkole/koleler";
     }
+
+
 }
