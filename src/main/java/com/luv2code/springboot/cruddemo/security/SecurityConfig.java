@@ -37,15 +37,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
-                        configurer
-                                .anyRequest().authenticated()
-                ).formLogin(form ->
-                        form.loginPage("/loginPage")
-                            .loginProcessingUrl("/authenticateTheUser")
-                            .permitAll()
+                        configurer.anyRequest().authenticated())
+                            .formLogin(form ->
+                                form.loginPage("/modernkole/loginPage")
+                                    .loginProcessingUrl("/modernkole/authenticateTheUser")
+                                    .permitAll()
                 );
+
         return http.build();
     }
 }

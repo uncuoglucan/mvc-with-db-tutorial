@@ -19,9 +19,17 @@ public class modernKoleController {
     }
 
     @GetMapping("/")
-    public String mainPage() {
+    public String showHome() {
+
         return "home";
     }
+
+
+    @GetMapping("/loginPage")
+    public String loginPage() {
+        return "loginPage";
+    }
+
 
 
     @RequestMapping(value = "/koleler", method = RequestMethod.GET)
